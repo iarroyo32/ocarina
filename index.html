@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Play the Ocarina of Time!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">A</span>
+    </div>
+    <div data-key="37" class="key">
+      <kbd>C-Left</kbd>
+      <span class="sound">C-Left</span>
+    </div>
+    <div data-key="38" class="key">
+      <kbd>C-Up</kbd>
+      <span class="sound">C-Up</span>
+    </div>
+    <div data-key="39" class="key">
+      <kbd>C-Right</kbd>
+      <span class="sound">C-Right</span>
+    </div>
+    <div data-key="40" class="key">
+      <kbd>C-Down</kbd>
+      <span class="sound">C-Down</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/short-a.wav"></audio>
+  <audio data-key="37" src="sounds/short-cleft.wav"></audio>
+  <audio data-key="38" src="sounds/short-cup.wav"></audio>
+  <audio data-key="39" src="sounds/short-cright.wav"></audio>
+  <audio data-key="40" src="sounds/short-cdown.wav"></audio>
+
+  <audio id="song-correct" src="sounds/song-correct.wav"></audio>
+  <audio id="song-of-time" src="sounds/song-of-time.mp3"></audio>
+  <audio id="zelda-lullaby" src="sounds/zelda-lullaby.mp3"></audio>
+
+
+<script>
+  let btns = {
+    A: 65,
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40,
+  }
+
+  let userInput = [];
+
+  let songOfTime = [btns.RIGHT, btns.A, btns.DOWN, btns.RIGHT, btns.A, btns.DOWN];
+  let zeldaLullaby = [btns.LEFT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP, btns.RIGHT];
+  // let sariaSong = [btns.DOWN, btns.RIGHT, btns.LEFT, btns.DOWN, btns.RIGHT, btns.LEFT];
+  // let eponaSong = [btns.UP, btns.LEFT, btns.RIGHT, btns.UP, btns.LEFT, btns.RIGHT];
+  // let sunSong = [btns.RIGHT, btns.DOWN, btns.UP, btns.RIGHT, btns.DOWN, btns.UP];
+  // let songOfStorms = [btns.A, btns.DOWN, btns.UP, btns.A, btns.DOWN, btns.UP];
+
+  let songCorrectAudio = document.querySelector("#song-correct");
+  let songOfTimeAudio = document.querySelector("#song-of-time");
+  let zeldaLullabyAudio = document.querySelector("#zelda-lullaby");
+
+  function playSound(event) {
+    let keyCode = event.keyCode;
+    let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+    if(!audio) return; //stops function from running! wow!
+    audio.currentTime = 0; //rewinds audio to the start
+    audio.play();
+    key.classList.add('playing');
+
+    if (userInput.length === 6){
+      userInput.shift()
+    };
+    userInput.push(keyCode);
+  
+    if (areArraysEqual(songOfTime, userInput)) {
+      userInput = [];
+        songCorrectAudio.currentTime = 0;
+        songCorrectAudio.play();
+        setTimeout(function(){
+          songOfTimeAudio.currentTime = 0;
+          songOfTimeAudio.play();
+        }, 200 )
+    }
+
+    if (areArraysEqual(zeldaLullaby, userInput)) {
+      userInput = [];
+        songCorrectAudio.currentTime = 0;
+        songCorrectAudio.play();
+        setTimeout(function(){
+          zeldaLullabyAudio.currentTime = 0;
+          zeldaLullabyAudio.play();
+        }, 200 )
+    }
+
+    console.log(userInput);
+  }
+
+  function removeTransition(event) {
+    if(event.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+
+  function areArraysEqual(arr1, arr2){
+    let areEqual = true;
+    arr1.forEach( function(value, index) {
+      if (arr1[index] !== arr2[index]) {
+        areEqual = false;
+      };
+    })
+    return areEqual;
+  }
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  window.addEventListener('keydown', playSound);
+ 
+</script>
+
+
+</body>
+</html>
