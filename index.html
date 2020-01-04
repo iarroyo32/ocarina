@@ -7,6 +7,7 @@
 </head>
 <body>
 
+  <div class="user-input"></div>
 
   <div class="keys">
     <div data-key="65" class="key">
@@ -40,7 +41,26 @@
   <audio id="song-correct" src="sounds/song-correct.wav"></audio>
   <audio id="song-of-time" src="sounds/song-of-time.mp3"></audio>
   <audio id="zelda-lullaby" src="sounds/zelda-lullaby.mp3"></audio>
+  <audio id="saria-song" src="sounds/saria-song.mp3"></audio>
+  <audio id="epona-song" src="sounds/epona-song.mp3"></audio>
+  <audio id="sun-song" src="sounds/sun-song.mp3"></audio>
+  <audio id="song-of-storms" src="sounds/song-of-storms.mp3"></audio>
+  <audio id="song-of-healing" src="sounds/song-of-healing.mp3"></audio>
+  <audio id="song-of-soaring" src="sounds/song-of-soaring.mp3"></audio>
+  <audio id="inverted-song-of-time" src="sounds/inverted-song-of-time.mp3"></audio>
+  <audio id="song-of-double-time" src="sounds/song-of-double-time.mp3"></audio>
+  <audio id="oath-to-order" src="sounds/oath-to-order.mp3"></audio>
 
+  <audio id="prelude-of-light" src="sounds/prelude-of-light.mp3"></audio>
+  <audio id="minuet-of-forest" src="sounds/minuet-of-forest.mp3"></audio>
+  <audio id="bolero-of-fire" src="sounds/bolero-of-fire.mp3"></audio>
+  <audio id="serenade-of-water" src="sounds/serenade-of-water.mp3"></audio>
+  <audio id="nocturne-of-shadow" src="sounds/nocturne-of-shadow.mp3"></audio>
+  <audio id="requiem-of-spirit" src="sounds/requiem-of-spirit.mp3"></audio>
+  <audio id="sonata-of-awakening" src="sounds/sonata-of-awakening.mp3"></audio>
+  <audio id="goron-lullaby" src="sounds/goron-lullaby.mp3"></audio>
+  <audio id="new-wave-bossa-nova" src="sounds/new-wave-bossa-nova.mp3"></audio>
+  <audio id="elegy-of-emptiness" src="sounds/elegy-of-emptiness.mp3"></audio>
 
 <script>
   let btns = {
@@ -52,12 +72,7 @@
   }
 
   let userInput = [];
-
-  // let sariaSong = [btns.DOWN, btns.RIGHT, btns.LEFT, btns.DOWN, btns.RIGHT, btns.LEFT];
-  // let eponaSong = [btns.UP, btns.LEFT, btns.RIGHT, btns.UP, btns.LEFT, btns.RIGHT];
-  // let sunSong = [btns.RIGHT, btns.DOWN, btns.UP, btns.RIGHT, btns.DOWN, btns.UP];
-  // let songOfStorms = [btns.A, btns.DOWN, btns.UP, btns.A, btns.DOWN, btns.UP];
-
+  let userInputEl = document.querySelector(".user-input");
   let songCorrectAudio = document.querySelector("#song-correct");
 
   let songLibrary = [
@@ -71,6 +86,101 @@
       input: [btns.LEFT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP, btns.RIGHT],
       audio: document.querySelector("#zelda-lullaby")
     },
+    {
+      name: 'sariaSong',
+      input: [btns.DOWN, btns.RIGHT, btns.LEFT, btns.DOWN, btns.RIGHT, btns.LEFT],
+      audio: document.querySelector("#saria-song")
+    },
+    {
+      name: 'eponaSong',
+      input: [btns.UP, btns.LEFT, btns.RIGHT, btns.UP, btns.LEFT, btns.RIGHT],
+      audio: document.querySelector("#epona-song")
+    },
+    {
+      name: 'sunSong',
+      input: [btns.RIGHT, btns.DOWN, btns.UP, btns.RIGHT, btns.DOWN, btns.UP],
+      audio: document.querySelector("#sun-song")
+    },
+    {
+      name: 'songOfStorms',
+      input: [btns.A, btns.DOWN, btns.UP, btns.A, btns.DOWN, btns.UP],
+      audio: document.querySelector("#song-of-storms")
+    },
+    {
+      name: 'songOfHealing',
+      input: [btns.LEFT, btns.RIGHT, btns.DOWN, btns.LEFT, btns.RIGHT, btns.DOWN],
+      audio: document.querySelector("#song-of-healing")
+    },
+    {
+      name: 'songOfSoaring',
+      input: [btns.DOWN, btns.LEFT, btns.UP, btns.DOWN, btns.LEFT, btns.UP],
+      audio: document.querySelector("#song-of-soaring")
+    },
+    {
+      name: 'invertedSongofTime',
+      input: [btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.A, btns.RIGHT],
+      audio: document.querySelector("#inverted-song-of-time")
+    },
+    {
+      name: 'songOfDoubleTime',
+      input: [btns.RIGHT, btns.RIGHT, btns.A, btns.A, btns.DOWN, btns.DOWN],
+      audio: document.querySelector("#song-of-double-time")
+    },
+    {
+      name: 'oathToOrder',
+      input: [btns.RIGHT, btns.DOWN, btns.A, btns.DOWN, btns.RIGHT],
+      audio: document.querySelector("#oath-to-order")
+    },
+    {
+      name: 'preludeOfLight',
+      input: [btns.UP, btns.RIGHT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP],
+      audio: document.querySelector("#prelude-of-light")
+    },
+    {
+      name: 'minuetOfForest',
+      input: [btns.A, btns.UP, btns.LEFT, btns.RIGHT, btns.LEFT, btns.RIGHT],
+      audio: document.querySelector("#minuet-of-forest")
+    },
+    {
+      name: 'boleroOfFire',
+      input: [btns.DOWN, btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.RIGHT, btns.DOWN],
+      audio: document.querySelector("#bolero-of-fire")
+    },
+    {
+      name: 'serenadeOfWater',
+      input: [btns.A, btns.DOWN, btns.RIGHT, btns.RIGHT, btns.LEFT],
+      audio: document.querySelector("#serenade-of-water")
+    },
+    {
+      name: 'nocturneOfShadow',
+      input: [btns.LEFT, btns.RIGHT, btns.RIGHT, btns.A, btns.LEFT, btns.RIGHT, btns.DOWN],
+      audio: document.querySelector("#nocturne-of-shadow")
+    },
+    {
+      name: 'requiemOfSpirit',
+      input: [btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.A],
+      audio: document.querySelector("#requiem-of-spirit")
+    },
+    {
+      name: 'sonataOfAwakening',
+      input: [btns.UP, btns.LEFT, btns.UP, btns.LEFT, btns.A, btns.RIGHT, btns.A],
+      audio: document.querySelector("#sonata-of-awakening")
+    },
+    {
+      name: 'goronLullaby',
+      input: [btns.A, btns.RIGHT, btns.LEFT, btns.A, btns.RIGHT, btns.LEFT, btns.RIGHT, btns.A],
+      audio: document.querySelector("#goron-lullaby")
+    },
+    {
+      name: 'newWaveBossaNova',
+      input: [btns.LEFT, btns.UP, btns.LEFT, btns.RIGHT, btns.DOWN, btns.LEFT, btns.RIGHT],
+      audio: document.querySelector("#new-wave-bossa-nova")
+    },
+    {
+      name: 'elegyOfEmptiness',
+      input: [btns.RIGHT, btns.LEFT, btns.RIGHT, btns.DOWN, btns.RIGHT, btns.UP, btns.LEFT],
+      audio: document.querySelector("#elegy-of-emptiness")
+    },
   ];
 
   function playSound(event) {
@@ -82,13 +192,22 @@
     audio.play();
     key.classList.add('playing');
 
-    if (userInput.length === 6){
+    if (userInput.length === 8){
       userInput.shift()
     };
     userInput.push(keyCode);
 
+    userInputEl.innerHTML = userInput.join(', ');
+
     for (let song of songLibrary) {
-      if (areArraysEqual(song.input, userInput)) {
+      let songLength = song.input.length;
+      let userInputCopy = [...userInput];
+
+      if (userInputCopy.length > songLength) {
+        userInputCopy.splice(0, userInputCopy.length - songLength);
+      }
+
+      if (areArraysEqual(song.input, userInputCopy)) {
         playSong(song.audio);
         break;
       }
@@ -99,12 +218,14 @@
 
   function playSong(songAudio) {
     userInput = [];
-      songCorrectAudio.currentTime = 0;
-      songCorrectAudio.play();
-      setTimeout(function(){
-        songAudio.currentTime = 0;
-        songAudio.play();
-      }, 200 );
+    userInputEl.innerHTML = userInput.join(', ');
+
+    songCorrectAudio.currentTime = 0;
+    songCorrectAudio.play();
+    setTimeout(function(){
+      songAudio.currentTime = 0;
+      songAudio.play();
+    }, 200 );
   }
 
   function removeTransition(event) {
@@ -113,7 +234,12 @@
   }
 
   function areArraysEqual(arr1, arr2){
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+
     let areEqual = true;
+
     arr1.forEach( function(value, index) {
       if (arr1[index] !== arr2[index]) {
         areEqual = false;
