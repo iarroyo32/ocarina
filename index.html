@@ -53,16 +53,25 @@
 
   let userInput = [];
 
-  let songOfTime = [btns.RIGHT, btns.A, btns.DOWN, btns.RIGHT, btns.A, btns.DOWN];
-  let zeldaLullaby = [btns.LEFT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP, btns.RIGHT];
   // let sariaSong = [btns.DOWN, btns.RIGHT, btns.LEFT, btns.DOWN, btns.RIGHT, btns.LEFT];
   // let eponaSong = [btns.UP, btns.LEFT, btns.RIGHT, btns.UP, btns.LEFT, btns.RIGHT];
   // let sunSong = [btns.RIGHT, btns.DOWN, btns.UP, btns.RIGHT, btns.DOWN, btns.UP];
   // let songOfStorms = [btns.A, btns.DOWN, btns.UP, btns.A, btns.DOWN, btns.UP];
 
   let songCorrectAudio = document.querySelector("#song-correct");
-  let songOfTimeAudio = document.querySelector("#song-of-time");
-  let zeldaLullabyAudio = document.querySelector("#zelda-lullaby");
+
+  let songLibrary = [
+    {
+      name: 'songOfTime',
+      input: [btns.RIGHT, btns.A, btns.DOWN, btns.RIGHT, btns.A, btns.DOWN],
+      audio: document.querySelector("#song-of-time")
+    },
+    {
+      name: 'zeldaLullaby',
+      input: [btns.LEFT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP, btns.RIGHT],
+      audio: document.querySelector("#zelda-lullaby")
+    },
+  ];
 
   function playSound(event) {
     let keyCode = event.keyCode;
@@ -77,28 +86,25 @@
       userInput.shift()
     };
     userInput.push(keyCode);
-  
-    if (areArraysEqual(songOfTime, userInput)) {
-      userInput = [];
-        songCorrectAudio.currentTime = 0;
-        songCorrectAudio.play();
-        setTimeout(function(){
-          songOfTimeAudio.currentTime = 0;
-          songOfTimeAudio.play();
-        }, 200 )
-    }
 
-    if (areArraysEqual(zeldaLullaby, userInput)) {
-      userInput = [];
-        songCorrectAudio.currentTime = 0;
-        songCorrectAudio.play();
-        setTimeout(function(){
-          zeldaLullabyAudio.currentTime = 0;
-          zeldaLullabyAudio.play();
-        }, 200 )
+    for (let song of songLibrary) {
+      if (areArraysEqual(song.input, userInput)) {
+        playSong(song.audio);
+        break;
+      }
     }
 
     console.log(userInput);
+  }
+
+  function playSong(songAudio) {
+    userInput = [];
+      songCorrectAudio.currentTime = 0;
+      songCorrectAudio.play();
+      setTimeout(function(){
+        songAudio.currentTime = 0;
+        songAudio.play();
+      }, 200 );
   }
 
   function removeTransition(event) {
