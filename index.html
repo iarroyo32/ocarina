@@ -7,62 +7,69 @@
 </head>
 <body>
 
-  <div class="user-input"></div>
+  <div id="root">
+    <div class="bg-image"></div>
 
-  <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">A</span>
-    </div>
-    <div data-key="37" class="key">
-      <kbd>C-Left</kbd>
-      <span class="sound">C-Left</span>
-    </div>
-    <div data-key="38" class="key">
-      <kbd>C-Up</kbd>
-      <span class="sound">C-Up</span>
-    </div>
-    <div data-key="39" class="key">
-      <kbd>C-Right</kbd>
-      <span class="sound">C-Right</span>
-    </div>
-    <div data-key="40" class="key">
-      <kbd>C-Down</kbd>
-      <span class="sound">C-Down</span>
+    <div class="interface">
+
+      <div class="user-input"></div>
+  
+      <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">A</span>
+        </div>
+        <div data-key="37" class="key">
+          <kbd>C-Left</kbd>
+          <span class="sound">C-Left</span>
+        </div>
+        <div data-key="38" class="key">
+          <kbd>C-Up</kbd>
+          <span class="sound">C-Up</span>
+        </div>
+        <div data-key="39" class="key">
+          <kbd>C-Right</kbd>
+          <span class="sound">C-Right</span>
+        </div>
+        <div data-key="40" class="key">
+          <kbd>C-Down</kbd>
+          <span class="sound">C-Down</span>
+        </div>
+      </div>
+  
+      <audio data-key="65" src="sounds/short-a.wav"></audio>
+      <audio data-key="37" src="sounds/short-cleft.wav"></audio>
+      <audio data-key="38" src="sounds/short-cup.wav"></audio>
+      <audio data-key="39" src="sounds/short-cright.wav"></audio>
+      <audio data-key="40" src="sounds/short-cdown.wav"></audio>
+  
+      <audio id="song-correct" src="sounds/song-correct.wav"></audio>
+      <audio id="warp-out" src="sounds/warp-out.wav"></audio>
+      <audio id="warp-in" src="sounds/warp-in.wav"></audio>
+      <audio id="song-of-time" src="sounds/song-of-time.mp3"></audio>
+      <audio id="zelda-lullaby" src="sounds/zelda-lullaby.mp3"></audio>
+      <audio id="saria-song" src="sounds/saria-song.mp3"></audio>
+      <audio id="epona-song" src="sounds/epona-song.mp3"></audio>
+      <audio id="sun-song" src="sounds/sun-song.mp3"></audio>
+      <audio id="song-of-storms" src="sounds/song-of-storms.mp3"></audio>
+      <audio id="song-of-healing" src="sounds/song-of-healing.mp3"></audio>
+      <audio id="song-of-soaring" src="sounds/song-of-soaring.mp3"></audio>
+      <audio id="inverted-song-of-time" src="sounds/inverted-song-of-time.mp3"></audio>
+      <audio id="song-of-double-time" src="sounds/song-of-double-time.mp3"></audio>
+      <audio id="oath-to-order" src="sounds/oath-to-order.mp3"></audio>
+  
+      <audio id="prelude-of-light" src="sounds/prelude-of-light.mp3"></audio>
+      <audio id="minuet-of-forest" src="sounds/minuet-of-forest.mp3"></audio>
+      <audio id="bolero-of-fire" src="sounds/bolero-of-fire.mp3"></audio>
+      <audio id="serenade-of-water" src="sounds/serenade-of-water.mp3"></audio>
+      <audio id="nocturne-of-shadow" src="sounds/nocturne-of-shadow.mp3"></audio>
+      <audio id="requiem-of-spirit" src="sounds/requiem-of-spirit.mp3"></audio>
+      <audio id="sonata-of-awakening" src="sounds/sonata-of-awakening.mp3"></audio>
+      <audio id="goron-lullaby" src="sounds/goron-lullaby.mp3"></audio>
+      <audio id="new-wave-bossa-nova" src="sounds/new-wave-bossa-nova.mp3"></audio>
+      <audio id="elegy-of-emptiness" src="sounds/elegy-of-emptiness.mp3"></audio>
     </div>
   </div>
-
-  <audio data-key="65" src="sounds/short-a.wav"></audio>
-  <audio data-key="37" src="sounds/short-cleft.wav"></audio>
-  <audio data-key="38" src="sounds/short-cup.wav"></audio>
-  <audio data-key="39" src="sounds/short-cright.wav"></audio>
-  <audio data-key="40" src="sounds/short-cdown.wav"></audio>
-
-  <audio id="song-correct" src="sounds/song-correct.wav"></audio>
-  <audio id="warp-out" src="sounds/warp-out.wav"></audio>
-  <audio id="warp-in" src="sounds/warp-in.wav"></audio>
-  <audio id="song-of-time" src="sounds/song-of-time.mp3"></audio>
-  <audio id="zelda-lullaby" src="sounds/zelda-lullaby.mp3"></audio>
-  <audio id="saria-song" src="sounds/saria-song.mp3"></audio>
-  <audio id="epona-song" src="sounds/epona-song.mp3"></audio>
-  <audio id="sun-song" src="sounds/sun-song.mp3"></audio>
-  <audio id="song-of-storms" src="sounds/song-of-storms.mp3"></audio>
-  <audio id="song-of-healing" src="sounds/song-of-healing.mp3"></audio>
-  <audio id="song-of-soaring" src="sounds/song-of-soaring.mp3"></audio>
-  <audio id="inverted-song-of-time" src="sounds/inverted-song-of-time.mp3"></audio>
-  <audio id="song-of-double-time" src="sounds/song-of-double-time.mp3"></audio>
-  <audio id="oath-to-order" src="sounds/oath-to-order.mp3"></audio>
-
-  <audio id="prelude-of-light" src="sounds/prelude-of-light.mp3"></audio>
-  <audio id="minuet-of-forest" src="sounds/minuet-of-forest.mp3"></audio>
-  <audio id="bolero-of-fire" src="sounds/bolero-of-fire.mp3"></audio>
-  <audio id="serenade-of-water" src="sounds/serenade-of-water.mp3"></audio>
-  <audio id="nocturne-of-shadow" src="sounds/nocturne-of-shadow.mp3"></audio>
-  <audio id="requiem-of-spirit" src="sounds/requiem-of-spirit.mp3"></audio>
-  <audio id="sonata-of-awakening" src="sounds/sonata-of-awakening.mp3"></audio>
-  <audio id="goron-lullaby" src="sounds/goron-lullaby.mp3"></audio>
-  <audio id="new-wave-bossa-nova" src="sounds/new-wave-bossa-nova.mp3"></audio>
-  <audio id="elegy-of-emptiness" src="sounds/elegy-of-emptiness.mp3"></audio>
 
 <script src="index.js"></script>
 

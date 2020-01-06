@@ -6,11 +6,11 @@ let btns = {
   DOWN: 40
 };
 
-let userInput = [];
 let userInputEl = document.querySelector(".user-input");
+let bgImageEl = document.querySelector(".bg-image");
 let songCorrectAudio = document.querySelector("#song-correct");
-// let warpOutAudio = document.querySelector("#warp-out");
-// let warpInAudio = document.querySelector("#warp-in");
+let warpOutAudio = document.querySelector("#warp-out");
+let warpInAudio = document.querySelector("#warp-in");
 
 let songLibrary = [
   {
@@ -126,12 +126,20 @@ let songLibrary = [
   }
 ];
 
+let state = {
+  userInput: [],
+  songPlaying: null,
+}
+
+
+
 init();
 
 function init(){
   const keys = document.querySelectorAll(".key");
-  keys.forEach(key => key.addEventListener("transitionend", removeTransition));
-  
+  keys.forEach(key => key.addEventListener("transitionend", removeKeyTransition));
+  songLibrary.forEach(song => song.audio.addEventListener("ended", handleSongEnd));
+  bgImageEl.addEventListener("transitionend", handleBgTransitionEnd);
   window.addEventListener("keydown", handleKeydown);
 }
 
@@ -147,40 +155,35 @@ function handleKeydown(event) {
   
   let song = searchSongInLibrary();
   if(song) {
-    playSong(song.audio);
+    playSong(song);
     clearUserInput();
-   
-
-    if (song.image){
-      document.body.style.backgroundImage = `url(${song.image})`;
     }
   }
 
 function playSound(keyCode){
   let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
   if (!audio) return;
-  audio.currentTime = 0;
-  audio.play();
+  playAudio(audio);
 }
 
 function updateUserInput(keyCode){
-  if (userInput.length === 8) {
-    userInput.shift();
+  if (state.userInput.length === 8) {
+    state.userInput.shift();
   }
-  userInput.push(keyCode);
+  state.userInput.push(keyCode);
 
-  userInputEl.innerHTML = userInput.join(", ");
+  userInputEl.innerHTML = state.userInput.join(", ");
 }
 
 function clearUserInput(){
-  userInput = [];
+  state.userInput = [];
   userInputEl.innerHTML = '';
 }
 
 function searchSongInLibrary(){
   for (let song of songLibrary) {
     let songLength = song.input.length;
-    let userInputCopy = [...userInput];
+    let userInputCopy = [...state.userInput];
 
     if (userInputCopy.length > songLength) {
       userInputCopy.splice(0, userInputCopy.length - songLength);
@@ -192,20 +195,37 @@ function searchSongInLibrary(){
   }
 }
 
-function playSong(songAudio) {
-  
-
-  songCorrectAudio.currentTime = 0;
-  songCorrectAudio.play();
+function playSong(song) {
+  playAudio(songCorrectAudio)
   setTimeout(function() {
-    songAudio.currentTime = 0;
-    songAudio.play();
+    playAudio(song.audio)
+    state.songPlaying = song;
   }, 200);
 }
 
-function removeTransition(event) {
+function handleSongEnd(){
+  if(state.songPlaying.image){
+    bgImageEl.style.opacity = 0;
+    playAudio(warpOutAudio);
+  }
+}
+  
+function handleBgTransitionEnd(){
+  if (bgImageEl.style.opacity === '1') return;
+
+  bgImageEl.style.backgroundImage = `url(${state.songPlaying.image})`;
+  bgImageEl.style.opacity = 1;
+  playAudio(warpInAudio);
+}
+
+function removeKeyTransition(event) {
   if (event.propertyName !== "transform") return;
   this.classList.remove("playing");
+}
+
+function playAudio(audio){
+  audio.currentTime = 0;
+  audio.play();
 }
 
 function areArraysEqual(arr1, arr2) {

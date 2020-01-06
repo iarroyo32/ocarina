@@ -2,18 +2,45 @@ html {
   font-size: 10px;
 }
 
-body {
-  background: url(images/hyrulefield.jpg) bottom center;
-  background-size: cover;
-}
-
 body,html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
 
+body {
+  /* for holy grail layout */
+  display: flex;
+  height: 100vh;
+}
+
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-image {
+  position: absolute;
+  background: url(images/hyrule-field.jpg) bottom center;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 5s ease-in-out;
+}
+
+.interface {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
 .user-input {
+  display: none;
   text-align: center;
   padding: 16px;
   font-size: 24px;
@@ -21,9 +48,8 @@ body,html {
 }
 
 .keys {
-  display: flex;
   flex: 1;
-  min-height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
