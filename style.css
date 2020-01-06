@@ -1,5 +1,8 @@
 html {
   font-size: 10px;
+}
+
+body {
   background: url(images/hyrulefield.jpg) bottom center;
   background-size: cover;
 }

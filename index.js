@@ -9,6 +9,8 @@ let btns = {
 let userInput = [];
 let userInputEl = document.querySelector(".user-input");
 let songCorrectAudio = document.querySelector("#song-correct");
+// let warpOutAudio = document.querySelector("#warp-out");
+// let warpInAudio = document.querySelector("#warp-in");
 
 let songLibrary = [
   {
@@ -69,32 +71,38 @@ let songLibrary = [
   {
     name: "preludeOfLight",
     input: [btns.UP, btns.RIGHT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP],
-    audio: document.querySelector("#prelude-of-light")
+    audio: document.querySelector("#prelude-of-light"),
+    image: 'images/temple-of-time.jpg',
   },
   {
     name: "minuetOfForest",
     input: [btns.A, btns.UP, btns.LEFT, btns.RIGHT, btns.LEFT, btns.RIGHT],
-    audio: document.querySelector("#minuet-of-forest")
+    audio: document.querySelector("#minuet-of-forest"),
+    image: 'images/sacred-forest-meadow.png',
   },
   {
     name: "boleroOfFire",
     input: [btns.DOWN, btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.RIGHT, btns.DOWN],
-    audio: document.querySelector("#bolero-of-fire")
+    audio: document.querySelector("#bolero-of-fire"),
+    image: 'images/death-mountain-crater.png',
   },
   {
     name: "serenadeOfWater",
     input: [btns.A, btns.DOWN, btns.RIGHT, btns.RIGHT, btns.LEFT],
-    audio: document.querySelector("#serenade-of-water")
+    audio: document.querySelector("#serenade-of-water"),
+    image: 'images/lake-hylia.png',
   },
   {
     name: "nocturneOfShadow",
     input: [btns.LEFT, btns.RIGHT, btns.RIGHT, btns.A, btns.LEFT, btns.RIGHT, btns.DOWN],
-    audio: document.querySelector("#nocturne-of-shadow")
+    audio: document.querySelector("#nocturne-of-shadow"),
+    image: 'images/kakariko-graveyard.png',
   },
   {
     name: "requiemOfSpirit",
     input: [btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.A],
-    audio: document.querySelector("#requiem-of-spirit")
+    audio: document.querySelector("#requiem-of-spirit"),
+    image: 'images/desert-colossus.jpg',
   },
   {
     name: "sonataOfAwakening",
@@ -118,22 +126,60 @@ let songLibrary = [
   }
 ];
 
-function playSound(event) {
+init();
+
+function init(){
+  const keys = document.querySelectorAll(".key");
+  keys.forEach(key => key.addEventListener("transitionend", removeTransition));
+  
+  window.addEventListener("keydown", handleKeydown);
+}
+
+function handleKeydown(event) {
   let keyCode = event.keyCode;
+
+  playSound(keyCode);
+
+  updateUserInput(keyCode);
+  
+  let song = searchSongInLibrary();
+  if(song) {
+    playSong(song.audio);
+    clearUserInput();
+   
+
+    if (song.image){
+      document.body.style.backgroundImage = `url(${song.image})`;
+    }
+  }
+
+  console.log(userInput);
+}
+
+function playSound(keyCode){
   let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
   const key = document.querySelector(`.key[data-key="${keyCode}"]`);
-  if (!audio) return; //stops function from running! wow!
-  audio.currentTime = 0; //rewinds audio to the start
+  if (!audio) return;
+  audio.currentTime = 0;
   audio.play();
   key.classList.add("playing");
+}
 
+function updateUserInput(keyCode){
   if (userInput.length === 8) {
     userInput.shift();
   }
   userInput.push(keyCode);
 
   userInputEl.innerHTML = userInput.join(", ");
+}
 
+function clearUserInput(){
+  userInput = [];
+  userInputEl.innerHTML = '';
+}
+
+function searchSongInLibrary(){
   for (let song of songLibrary) {
     let songLength = song.input.length;
     let userInputCopy = [...userInput];
@@ -143,17 +189,13 @@ function playSound(event) {
     }
 
     if (areArraysEqual(song.input, userInputCopy)) {
-      playSong(song.audio);
-      break;
+      return song;
     }
   }
-
-  console.log(userInput);
 }
 
 function playSong(songAudio) {
-  userInput = [];
-  userInputEl.innerHTML = userInput.join(", ");
+  
 
   songCorrectAudio.currentTime = 0;
   songCorrectAudio.play();
@@ -182,8 +224,3 @@ function areArraysEqual(arr1, arr2) {
   });
   return areEqual;
 }
-
-const keys = document.querySelectorAll(".key");
-keys.forEach(key => key.addEventListener("transitionend", removeTransition));
-
-window.addEventListener("keydown", playSound);
