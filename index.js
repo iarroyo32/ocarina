@@ -137,6 +137,9 @@ function init(){
 
 function handleKeydown(event) {
   let keyCode = event.keyCode;
+  const key = document.querySelector(`.key[data-key="${keyCode}"]`);
+  if (!key) return;
+  key.classList.add("playing");
 
   playSound(keyCode);
 
@@ -153,16 +156,11 @@ function handleKeydown(event) {
     }
   }
 
-  console.log(userInput);
-}
-
 function playSound(keyCode){
   let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
-  const key = document.querySelector(`.key[data-key="${keyCode}"]`);
   if (!audio) return;
   audio.currentTime = 0;
   audio.play();
-  key.classList.add("playing");
 }
 
 function updateUserInput(keyCode){
