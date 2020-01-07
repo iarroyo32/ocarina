@@ -7,6 +7,7 @@ let btns = {
 };
 
 let userInputEl = document.querySelector(".user-input");
+let songNameEl = document.querySelector(".song-name");
 let bgImageEl = document.querySelector(".bg-image");
 let songCorrectAudio = document.querySelector("#song-correct");
 let warpOutAudio = document.querySelector("#warp-out");
@@ -14,113 +15,113 @@ let warpInAudio = document.querySelector("#warp-in");
 
 let songLibrary = [
   {
-    name: "songOfTime",
+    name: "the Song of Time",
     input: [btns.RIGHT, btns.A, btns.DOWN, btns.RIGHT, btns.A, btns.DOWN],
     audio: document.querySelector("#song-of-time")
   },
   {
-    name: "zeldaLullaby",
+    name: "Zelda's Lullaby",
     input: [btns.LEFT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP, btns.RIGHT],
     audio: document.querySelector("#zelda-lullaby")
   },
   {
-    name: "sariaSong",
+    name: "Saria's Song",
     input: [btns.DOWN, btns.RIGHT, btns.LEFT, btns.DOWN, btns.RIGHT, btns.LEFT],
     audio: document.querySelector("#saria-song")
   },
   {
-    name: "eponaSong",
+    name: "Epona's Song",
     input: [btns.UP, btns.LEFT, btns.RIGHT, btns.UP, btns.LEFT, btns.RIGHT],
     audio: document.querySelector("#epona-song")
   },
   {
-    name: "sunSong",
+    name: "the Sun's Song",
     input: [btns.RIGHT, btns.DOWN, btns.UP, btns.RIGHT, btns.DOWN, btns.UP],
     audio: document.querySelector("#sun-song")
   },
   {
-    name: "songOfStorms",
+    name: "the Song of Storms",
     input: [btns.A, btns.DOWN, btns.UP, btns.A, btns.DOWN, btns.UP],
     audio: document.querySelector("#song-of-storms")
   },
   {
-    name: "songOfHealing",
+    name: "the Song of Healing",
     input: [btns.LEFT, btns.RIGHT, btns.DOWN, btns.LEFT, btns.RIGHT, btns.DOWN],
     audio: document.querySelector("#song-of-healing")
   },
   {
-    name: "songOfSoaring",
+    name: "the Song of Soaring",
     input: [btns.DOWN, btns.LEFT, btns.UP, btns.DOWN, btns.LEFT, btns.UP],
     audio: document.querySelector("#song-of-soaring")
   },
   {
-    name: "invertedSongofTime",
+    name: "the Inverted Song of Time",
     input: [btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.A, btns.RIGHT],
     audio: document.querySelector("#inverted-song-of-time")
   },
   {
-    name: "songOfDoubleTime",
+    name: "the Song of Double Time",
     input: [btns.RIGHT, btns.RIGHT, btns.A, btns.A, btns.DOWN, btns.DOWN],
     audio: document.querySelector("#song-of-double-time")
   },
   {
-    name: "oathToOrder",
+    name: "the Oath to Order",
     input: [btns.RIGHT, btns.DOWN, btns.A, btns.DOWN, btns.RIGHT],
     audio: document.querySelector("#oath-to-order")
   },
   {
-    name: "preludeOfLight",
+    name: "the Prelude of Light",
     input: [btns.UP, btns.RIGHT, btns.UP, btns.RIGHT, btns.LEFT, btns.UP],
     audio: document.querySelector("#prelude-of-light"),
     image: 'images/temple-of-time.jpg',
   },
   {
-    name: "minuetOfForest",
+    name: "the Minuet of Forest",
     input: [btns.A, btns.UP, btns.LEFT, btns.RIGHT, btns.LEFT, btns.RIGHT],
     audio: document.querySelector("#minuet-of-forest"),
     image: 'images/sacred-forest-meadow.png',
   },
   {
-    name: "boleroOfFire",
+    name: "the Bolero of Fire",
     input: [btns.DOWN, btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.RIGHT, btns.DOWN],
     audio: document.querySelector("#bolero-of-fire"),
     image: 'images/death-mountain-crater.png',
   },
   {
-    name: "serenadeOfWater",
+    name: "the Serenade of Water",
     input: [btns.A, btns.DOWN, btns.RIGHT, btns.RIGHT, btns.LEFT],
     audio: document.querySelector("#serenade-of-water"),
     image: 'images/lake-hylia.png',
   },
   {
-    name: "nocturneOfShadow",
+    name: "the Nocturne of Shadow",
     input: [btns.LEFT, btns.RIGHT, btns.RIGHT, btns.A, btns.LEFT, btns.RIGHT, btns.DOWN],
     audio: document.querySelector("#nocturne-of-shadow"),
     image: 'images/kakariko-graveyard.png',
   },
   {
-    name: "requiemOfSpirit",
+    name: "the Requiem of Spirit",
     input: [btns.A, btns.DOWN, btns.A, btns.RIGHT, btns.DOWN, btns.A],
     audio: document.querySelector("#requiem-of-spirit"),
     image: 'images/desert-colossus.jpg',
   },
   {
-    name: "sonataOfAwakening",
+    name: "the Sonata of Awakening",
     input: [btns.UP, btns.LEFT, btns.UP, btns.LEFT, btns.A, btns.RIGHT, btns.A],
     audio: document.querySelector("#sonata-of-awakening")
   },
   {
-    name: "goronLullaby",
+    name: "the Goron Lullaby",
     input: [btns.A, btns.RIGHT, btns.LEFT, btns.A, btns.RIGHT, btns.LEFT, btns.RIGHT, btns.A],
     audio: document.querySelector("#goron-lullaby")
   },
   {
-    name: "newWaveBossaNova",
+    name: "the New Wave Bossa Nova",
     input: [btns.LEFT, btns.UP, btns.LEFT, btns.RIGHT, btns.DOWN, btns.LEFT, btns.RIGHT],
     audio: document.querySelector("#new-wave-bossa-nova")
   },
   {
-    name: "elegyOfEmptiness",
+    name: "the Elegy of Emptiness",
     input: [btns.RIGHT, btns.LEFT, btns.RIGHT, btns.DOWN, btns.RIGHT, btns.UP, btns.LEFT],
     audio: document.querySelector("#elegy-of-emptiness")
   }
@@ -130,8 +131,6 @@ let state = {
   userInput: [],
   songPlaying: null,
 }
-
-
 
 init();
 
@@ -157,8 +156,8 @@ function handleKeydown(event) {
   if(song) {
     playSong(song);
     clearUserInput();
-    }
   }
+}
 
 function playSound(keyCode){
   let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
@@ -178,6 +177,10 @@ function updateUserInput(keyCode){
 function clearUserInput(){
   state.userInput = [];
   userInputEl.innerHTML = '';
+}
+
+function clearSongName(){
+  songNameEl.innerHTML = '';
 }
 
 function searchSongInLibrary(){
@@ -200,6 +203,7 @@ function playSong(song) {
   setTimeout(function() {
     playAudio(song.audio)
     state.songPlaying = song;
+    songNameEl.innerHTML = `You played ${song.name}.`;
   }, 200);
 }
 
@@ -208,8 +212,9 @@ function handleSongEnd(){
     bgImageEl.style.opacity = 0;
     playAudio(warpOutAudio);
   }
+  clearSongName();
 }
-  
+
 function handleBgTransitionEnd(){
   if (bgImageEl.style.opacity === '1') return;
 

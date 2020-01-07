@@ -46,6 +46,12 @@ body {
   font-size: 24px;
   font-weight: bold;
 }
+.song-name {
+  text-align: center;
+  padding: 16px;
+  font-size: 24px;
+  font-weight: bold;
+}
 
 .keys {
   flex: 1;
