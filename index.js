@@ -130,6 +130,7 @@ let songLibrary = [
 let state = {
   userInput: [],
   songPlaying: null,
+  songName: null,
 }
 
 init();
@@ -167,20 +168,17 @@ function playSound(keyCode){
 
 function updateUserInput(keyCode){
   if (state.userInput.length === 8) {
-    state.userInput.shift();
+    setUserInput(state.userInput.slice(1, state.userInput.length));
   }
-  state.userInput.push(keyCode);
-
-  userInputEl.innerHTML = state.userInput.join(", ");
+  setUserInput([...state.userInput, keyCode]);
 }
 
 function clearUserInput(){
-  state.userInput = [];
-  userInputEl.innerHTML = '';
+  setUserInput([]);
 }
 
 function clearSongName(){
-  songNameEl.innerHTML = '';
+  setSongName('');
 }
 
 function searchSongInLibrary(){
@@ -202,8 +200,8 @@ function playSong(song) {
   playAudio(songCorrectAudio)
   setTimeout(function() {
     playAudio(song.audio)
-    state.songPlaying = song;
-    songNameEl.innerHTML = `You played ${song.name}.`;
+    setSongPlaying(song);
+    setSongName(song.name);
   }, 200);
 }
 
@@ -221,6 +219,7 @@ function handleBgTransitionEnd(){
   bgImageEl.style.backgroundImage = `url(${state.songPlaying.image})`;
   bgImageEl.style.opacity = 1;
   playAudio(warpInAudio);
+  setSongPlaying(null);
 }
 
 function removeKeyTransition(event) {
@@ -231,6 +230,29 @@ function removeKeyTransition(event) {
 function playAudio(audio){
   audio.currentTime = 0;
   audio.play();
+}
+
+function setUserInput(userInput) {
+  setState({ userInput: userInput });
+  userInputEl.innerHTML = state.userInput.join(", ");
+}
+
+function setSongPlaying(song) {
+  setState({ songPlaying: song });
+}
+
+function setSongName(songName) {
+  setState({ songName: songName });
+
+  if (songName) {
+    songNameEl.innerHTML = `You played ${songName}.`;
+  } else {
+    songNameEl.innerHTML = '';
+  }
+}
+
+function setState(newState) {
+  Object.assign(state, newState);
 }
 
 function areArraysEqual(arr1, arr2) {
