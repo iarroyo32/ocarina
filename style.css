@@ -20,9 +20,15 @@ body {
   flex-direction: column;
 }
 
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .bg-image {
   position: absolute;
-  background: url(images/hyrule-field.jpg) bottom center;
+  background-position: bottom center;
   background-size: cover;
   top: 0;
   left: 0;
